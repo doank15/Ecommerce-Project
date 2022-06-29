@@ -3,27 +3,27 @@ const mongoose = require("mongoose");
 const productSchema = mongoose.Schema({
     name: {
         type: String,
-        require: [true, "Please Enter Product Name!"], 
+        required: [true, "Please Enter Product Name!"], 
         trim: true,
     },
     description: {  
         type: String, 
-        require: [true, "Please Enter Product Description! "]
+        required: [true, "Please Enter Product Description! "]
     },
     price : { 
         type: Number, 
-        require: [true, "Please Enter Product Price!"],
+        required: [true, "Please Enter Product Price!"],
         maxLength: [8, "Price cannot exeed 8 characters!"]
     },
     images: [
         {
             public_id:  {
                 type: String, 
-                require: true
+                required: true
             },
             url : {
                 type: String, 
-                require: true
+                required: true
             }
         }
     ], 
@@ -33,11 +33,11 @@ const productSchema = mongoose.Schema({
     },
     category: {
         type: String, 
-        require: [true, "Please Enter Product Category!"]
+        required: [true, "Please Enter Product Category!"]
     },
     stock : { 
         type: Number, 
-        require: [true, "Please Enter Product Stock!"],
+        required: [true, "Please Enter Product Stock!"],
         default: 1,
         maxLength: [4, "Stock cannot exceed 4 characters"]
     },
@@ -45,15 +45,15 @@ const productSchema = mongoose.Schema({
         {
             name : {
             type: String, 
-            require: true
+            required: true
             },
             rating: {
                 type: Number, 
-                require: true
+                required: true
             }, 
             comment: {
                 type: String, 
-                require: true
+                required: true
             } 
         }
     ],
@@ -63,7 +63,7 @@ const productSchema = mongoose.Schema({
     },
     createdAt: {
         type: Date,
-        require: true,
+        required: true,
         default: Date.now,
     }
 })
