@@ -12,7 +12,9 @@ exports.createNewProduct = catchAsync(async (req, res, next) => {
 });
 // Get all the products
 exports.getAllProducts = catchAsync(async (req, res, next) => {
-  const apiFeatures = new Apifeatures(Product.find(), req.query).search();
+  const apiFeatures = new Apifeatures(Product.find(), req.query)
+  .search()
+  .filters();
   const product = await apiFeatures.query;
   res.status(200).json({
     success: true,
