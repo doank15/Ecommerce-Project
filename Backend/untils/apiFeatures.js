@@ -28,6 +28,12 @@ class Apifeatures {
         this.query = this.query.find(JSON.parse(queryStr));
         return this
     }
+    pagination(resultPerPage) {
+        const currentPage = Number(this.queryStr.page) || 1;
+        const skip = (currentPage - 1) * resultPerPage;
+        this.query = this.query.limit(resultPerPage).skip(skip);
+        return this;
+    }
 }
 
 module.exports = Apifeatures;
