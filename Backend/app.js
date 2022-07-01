@@ -3,11 +3,17 @@ const app = express();
 const productRoutes = require("./routes/productRoutes");
 const bodyParser = require("body-parser");
 const errMiddleware = require("./middleware/error");
+const userRoutes = require("./routes/userRoutes");
+
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json());
 
+// api for product
 app.use("/api/v1", productRoutes);
+//api for user
+app.use("/api/v1", userRoutes);
 //using middleware
 app.use(errMiddleware);
 

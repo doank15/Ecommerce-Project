@@ -13,7 +13,7 @@ exports.createNewProduct = catchAsync(async (req, res, next) => {
 // Get all the products
 exports.getAllProducts = catchAsync(async (req, res, next) => {
   // This will let us know how many products we want in every page
-  const resultPage = 0;
+  const resultPage = 5;
   const productCount = await Product.countDocuments();
   const apiFeatures = new Apifeatures(Product.find(), req.query)
   .search()

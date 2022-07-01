@@ -23,7 +23,7 @@ class Apifeatures {
         removeFields.forEach((key) => delete queryCopy[key]);
         // filter for Price
         let queryStr = JSON.stringify(queryCopy);
-        queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/gi, key => `$${key}`);
+        queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/gi, (key) => `$${key}`);
         
         this.query = this.query.find(JSON.parse(queryStr));
         return this
