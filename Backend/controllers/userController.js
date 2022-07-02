@@ -15,8 +15,10 @@ exports.RegisterUser = catchAsync(async(req, res, next)=> {
             url: "profile pic url" 
         }
     })
+    const token = User.getJWTTOken();
     res.status(200).json({
         success: true,
-        user
+        token
     })
 })
+
