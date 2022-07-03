@@ -1,6 +1,7 @@
 const User = require("../models/userModel");
 const ErrorHandler = require("../untils/errorHandler");
 const catchAsync = require("../middleware/catchAsyncErrors");
+const sendToken = require("../untils/jwtToken");
 
 //Register User
 exports.RegisterUser = catchAsync(async(req, res, next)=> {
@@ -15,10 +16,27 @@ exports.RegisterUser = catchAsync(async(req, res, next)=> {
             url: "profile pic url" 
         }
     })
-    const token = User.generateToken();
+   sendToken(user, 201, res);
+})
+
+
+//Login
+exports.Login = catchAsync(async(req, res, next) => {
+    const {email, password} = req.body;
+    if(!email || !password) {
+        return next(ErrorHandler("Email or Password is Invalid!!!", 400));
+    }
+    const user = User.findOne({email}).select("+password");
+    if(!user) {
+        return next(ErrorHandler("Invalid email or password!!!",400));
+    }
+    const isPasswordMatched = user.comparedPassword(password);
+    if(!isPasswordMatched) {
+        return next(ErrorHandler("Email or Password is wrong!!!", 400));
+    }
+    const token = user.generateToken();
     res.status(200).json({
         success: true,
         token
     })
 })
-
